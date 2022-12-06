@@ -1,14 +1,9 @@
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import {useBlockProps, RichText} from '@wordpress/block-editor';
 
-import {PanelBody, Button, ResponsiveWrapper } from '@wordpress/components';
+import {MediaUpload, MediaUploadCheck} from '@wordpress/block-editor';
+import {Button, TextControl, ToggleControl} from '@wordpress/components';
 
-import {withSelect } from '@wordpress/data';
+import {withSelect} from '@wordpress/data';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -26,27 +21,28 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-function Edit( { attributes, setAttributes }) {
-
-	const onChangeDescription = ( newDescription ) => {
-		setAttributes( { description: newDescription } )
-	};
+function Edit(props) {
+	const {attributes, setAttributes} = props;
 
 	const onSelectMedia = (media) => {
-		props.setAttributes({
+		setAttributes({
 			mediaId: media.id,
 			mediaUrl: media.url
 		});
 	};
 
-	const blockStyle = {
-		backgroundImage: attributes.mediaUrl !== '' ? 'url("' + attributes.mediaUrl + '")' : 'none'
-	};
-
 	return (
 		<div {...useBlockProps()}>
+
+			<TextControl
+				label="Name"
+				value={attributes.name}
+				onChange={(value) => setAttributes({name: value})}
+			/>
+
+
 			<RichText
-				onChange={onChangeDescription}
+				onChange={(value) => setAttributes({description: value})}
 				tagName="p"
 				allowedFormats={['core/bold', 'core/italic']}
 				value={attributes.description}
@@ -58,20 +54,17 @@ function Edit( { attributes, setAttributes }) {
 				<MediaUpload
 					onSelect={onSelectMedia}
 					value={attributes.mediaId}
-					allowedTypes={ ['image'] }
+					allowedTypes={['image']}
 					render={({open}) => (
 						<Button
-							className={attributes.mediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+							className={attributes.mediaId === 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
 							onClick={open}
+							style={{display: "contents"}}
 						>
-							{attributes.mediaId == 0 && __('Choose an image', 'awp')}
-							{props.media != undefined &&
-								<ResponsiveWrapper
-									naturalWidth={ props.media.media_details.width }
-									naturalHeight={ props.media.media_details.height }
-								>
-									<img src={props.media.source_url} />
-								</ResponsiveWrapper>
+							{attributes.mediaId === 0 && 'Choose an image'}
+							{props.media !== undefined &&
+								<img src={props.media.source_url} alt="img preview"
+									 style={{maxWidth: "150px", maxHeight: "150px", display: "block"}}/>
 							}
 						</Button>
 					)}
@@ -80,18 +73,72 @@ function Edit( { attributes, setAttributes }) {
 			{attributes.mediaId !== 0 &&
 				<MediaUploadCheck>
 					<MediaUpload
-						title={__('Replace image', 'awp')}
+						title={'Replace image'}
 						value={attributes.mediaId}
 						onSelect={onSelectMedia}
 						allowedTypes={['image']}
 						render={({open}) => (
-							<Button onClick={open} isDefault isLarge>{__('Replace image', 'awp')}</Button>
+							<Button onClick={open} isDefault isLarge>{'Replace image'}</Button>
 						)}
 					/>
 				</MediaUploadCheck>
 			}
-			<div style={blockStyle}>
-				... Your block content here...
+
+			<ToggleControl
+				label="Right"
+				checked={attributes.right}
+				onChange={() => {
+					setAttributes({right: !attributes.right});
+				}}
+			/>
+
+			<div className="grid grid-cols-2">
+				<div>
+					<TextControl
+						label="Attr1"
+						value={attributes.attr1}
+						onChange={(value) => setAttributes({attr1: value})}
+					/>
+				</div>
+				<div>
+					<TextControl
+						label="Val1"
+						value={attributes.val1}
+						onChange={(value) => setAttributes({val1: value})}
+					/>
+				</div>
+
+				<div>
+					<TextControl
+						label="Attr2"
+						value={attributes.attr2}
+						onChange={(value) => setAttributes({attr2: value})}
+					/>
+				</div>
+				<div>
+					<TextControl
+						label="Val2"
+						value={attributes.val2}
+						onChange={(value) => setAttributes({val2: value})}
+					/>
+				</div>
+
+				<div>
+					<TextControl
+						label="Attr3"
+						value={attributes.attr3}
+						onChange={(value) => setAttributes({attr3: value})}
+					/>
+				</div>
+				<div>
+					<TextControl
+						label="Val3"
+						value={attributes.val3}
+						onChange={(value) => setAttributes({val3: value})}
+					/>
+				</div>
+
+
 			</div>
 
 		</div>
@@ -100,5 +147,5 @@ function Edit( { attributes, setAttributes }) {
 }
 
 export default withSelect((select, props) => {
-	return { media: props.attributes.mediaId ? select('core').getMedia(props.attributes.mediaId) : undefined };
+	return {media: props.attributes.mediaId ? select('core').getMedia(props.attributes.mediaId) : undefined};
 })(Edit)
