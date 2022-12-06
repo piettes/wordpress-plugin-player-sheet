@@ -1,0 +1,71 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "create-block/player-sheet",
+	"version": "0.1.0",
+	"title": "Player Sheet",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Player block",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "player-sheet",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+  "attributes": {
+	"description": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"name": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"mediaId": {
+	  "type": "number",
+	  "default": 0
+	},
+	"mediaUrl": {
+	  "type": "string",
+	  "default": ""
+	},
+	"right": {
+	  "type": "boolean",
+	  "default": false
+	},
+	"attr1": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"val1": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"attr2": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"val2": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"attr3": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	},
+	"val3": {
+	  "type": "string",
+	  "source": "html",
+	  "selector": "p"
+	}
+  }
+}
