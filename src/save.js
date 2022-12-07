@@ -20,57 +20,47 @@ export default function save({attributes}) {
 	return (
 		<div {...useBlockProps.save()} >
 
-			<div className="grid lg:grid-cols-2 gap-2">
+			<div className={"flex flex-wrap " + (attributes.right ? "lg:justify-end" : "")}>
 
 
-				<div className={"player-name-image " + (attributes.right ? "lg:order-last" : "")}>
-					<div>
-						<img className="player-image" src={attributes.mediaUrl}/>
-					</div>
-					<div className="player-name inline-block text-5xl lg:text-5xl px-4 py-4">
-						Body
-						Bab
-					</div>
+				<div className={"player-name-image flex" + (attributes.right ? "" : "")}>
+					<img className="player-image self-end" src={attributes.mediaUrl}/>
 				</div>
 
-				<div className={"flex flex-col justify-center player-info"}>
+				<div
+					className={"player-info grow order-last mt-3   " + (attributes.right ? "lg:order-first" : "lg:order-none")}>
 
 					<div className="player-description">
-						Grosse description avec un super text de la mort qui tue. Et après on est content et on va jouer
-						aux
-						billes
+						<RichText.Content
+							tagName="p"
+							value={attributes.description}
+						/>
 					</div>
 					<div className="grid grid-cols-2 player-attributes">
-						<div>Taille</div>
-						<div>1400 mm</div>
-						<div>Ville de naissance</div>
-						<div>Loutreville</div>
-						<div>🇩🇪🇬🇧🇫🇷🇨🇦</div>
+						<div>{attributes.attr1}</div>
+						<div>{attributes.val1}</div>
+						<div>{attributes.attr2}</div>
+						<div>{attributes.val2}</div>
+						<div>{attributes.attr3}</div>
+						<div>{attributes.val3}</div>
 					</div>
 				</div>
 
-				{/*<div>*/}
-				{/*	<div>*/}
-				{/*		<img className="player-image" src={attributes.mediaUrl}/>*/}
-				{/*	</div>*/}
-				{/*	<h2>{attributes.name}</h2>*/}
-				{/*</div>*/}
+				<div className="basis-full"></div>
 
-				{/*<div>*/}
+				<div
+					className={"player-name inline-block text-5xl lg:text-5xl px-4 py-4 " + (attributes.right ? "" : "")}>
+					{attributes.name}
+				</div>
 
-				{/*	<RichText.Content*/}
-				{/*		tagName="p"*/}
-				{/*		value={attributes.description}*/}
-				{/*	/>*/}
-				{/*</div>*/}
-				{/*<div>*/}
-				{/*	<div>{attributes.attr1}</div>*/}
-				{/*	<div>{attributes.val1}</div>*/}
-				{/*	<div>{attributes.attr2}</div>*/}
-				{/*	<div>{attributes.val2}</div>*/}
-				{/*	<div>{attributes.attr3}</div>*/}
-				{/*	<div>{attributes.val3}</div>*/}
-				{/*</div>*/}
+				<div className="basis-full"></div>
+
+
+					<RichText.Content
+						tagName="p"
+						value={attributes.description}
+					/>
+
 
 
 			</div>
