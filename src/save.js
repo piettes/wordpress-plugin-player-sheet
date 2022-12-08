@@ -16,15 +16,20 @@ import {useBlockProps, RichText} from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save({attributes}) {
+	const blockProps = useBlockProps.save();
+
+	const backgroundImageStyle = {
+		backgroundImage: attributes.mediaUrl !== '' ? 'url("' + attributes.mediaUrl + '")' : 'none'
+	};
 
 	return (
-		<div {...useBlockProps.save()} >
+		<div {...blockProps}>
 
 			<div className={"flex flex-wrap " + (attributes.right ? "lg:justify-end" : "")}>
 
 
 				<div className={"player-name-image flex" + (attributes.right ? "" : "")}>
-					<img className="player-image self-end" src={attributes.mediaUrl}/>
+					<div className="player-image self-end" style={backgroundImageStyle}/>
 				</div>
 
 				<div
@@ -54,14 +59,6 @@ export default function save({attributes}) {
 				</div>
 
 				<div className="basis-full"></div>
-
-
-					<RichText.Content
-						tagName="p"
-						value={attributes.description}
-					/>
-
-
 
 			</div>
 		</div>

@@ -17,12 +17,10 @@
   "attributes": {
 	"description": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"name": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"mediaId": {
@@ -39,32 +37,26 @@
 	},
 	"attr1": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"val1": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"attr2": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"val2": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"attr3": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	},
 	"val3": {
 	  "type": "string",
-	  "source": "html",
 	  "selector": "p"
 	}
   }
