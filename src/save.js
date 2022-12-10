@@ -25,7 +25,7 @@ export default function save({attributes}) {
 	return (
 		<div {...blockProps}>
 
-			<div className={"flex flex-wrap " + (attributes.right ? "lg:justify-end" : "")}>
+			<div className={"flex flex-wrap justify-center " + (attributes.right ? "lg:justify-end" : "lg:justify-start")}>
 
 
 				<div className={"player-name-image flex" + (attributes.right ? "" : "")}>
@@ -35,13 +35,11 @@ export default function save({attributes}) {
 				<div
 					className={"player-info grow order-last mt-3   " + (attributes.right ? "lg:order-first" : "lg:order-none")}>
 
-					<div className="player-description">
-						<RichText.Content
-							tagName="p"
-							value={attributes.description}
-						/>
-					</div>
-					<div className="grid grid-cols-2 player-attributes">
+					<RichText.Content className="player-description"
+									  tagName="div"
+									  value={attributes.description}
+					/>
+					<div className="player-attributes">
 						<div>{attributes.attr1}</div>
 						<div>{attributes.val1}</div>
 						<div>{attributes.attr2}</div>
