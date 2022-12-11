@@ -16,14 +16,13 @@ import {useBlockProps, RichText} from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save({attributes}) {
-	const blockProps = useBlockProps.save();
 
 	const backgroundImageStyle = {
 		backgroundImage: attributes.mediaUrl !== '' ? 'url("' + attributes.mediaUrl + '")' : 'none'
 	};
 
 	return (
-		<div {...blockProps}>
+		<div {...useBlockProps.save()}>
 
 			<div className={"flex flex-wrap justify-center " + (attributes.right ? "lg:justify-end" : "lg:justify-start")}>
 

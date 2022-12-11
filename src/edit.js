@@ -31,9 +31,8 @@ function Edit(props) {
 		});
 	};
 
-	const blockProps = useBlockProps();
 	return (
-		<div {...useBlockProps}>
+		<div {...useBlockProps()}>
 
 			<TextControl
 				label="Name"
